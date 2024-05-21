@@ -2,7 +2,7 @@
 using Spectre.Console;
 
 namespace DrinksInfo;
-internal class TableVisualization
+public class TableVisualization
 {
     public static void ShowCategoriesTable(List<Category> tableData)
     {

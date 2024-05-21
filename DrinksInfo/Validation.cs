@@ -1,7 +1,7 @@
 ﻿using Spectre.Console;
 
 namespace DrinksInfo;
-internal class Validation
+public class Validation
 {
     public static ValidationResult IsStringValid(string input)
     {

@@ -1,13 +1,16 @@
 ﻿using Spectre.Console;
 
 namespace DrinksInfo;
-internal class UserInput
+public class UserInput
 {
-    DrinksService drinksService = new();
-
-    internal async Task GetCategoriesInput()
+    private readonly IDrinksService _drinksService;
+    public UserInput(IDrinksService drinksService)
     {
-        var categories = await drinksService.GetCategories();
+        _drinksService = drinksService;
+    }
+    public async Task GetCategoriesInput()
+    {
+        var categories = await _drinksService.GetCategories();
 
         string category = AnsiConsole.Prompt(
             new TextPrompt<string>("Choose category: ")
@@ -23,9 +26,9 @@ internal class UserInput
         await GetDrinksInput(category);
     }
 
-    internal async Task GetDrinksInput(string category)
+    public async Task GetDrinksInput(string category)
     {
-        var drinks = await drinksService.GetDrinksByCategory(category);
+        var drinks = await _drinksService.GetDrinksByCategory(category);
 
         string drink = AnsiConsole.Prompt(
             new TextPrompt<string>("Choose a drink (press 0 to go back to categories): ")
@@ -43,7 +46,7 @@ internal class UserInput
             await GetDrinksInput(category);
         }
 
-        await drinksService.GetDrink(drink);
+        await _drinksService.GetDrink(drink);
 
         AnsiConsole.Write("Press any key to go back to categories menu... \n");
         Console.ReadKey();

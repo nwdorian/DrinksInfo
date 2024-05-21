@@ -1,4 +1,11 @@
 ﻿using DrinksInfo;
+using Microsoft.Extensions.DependencyInjection;
 
-UserInput userInput = new();
+var serviceProvider = new ServiceCollection()
+    .AddSingleton<IDrinksService, DrinksService>()
+    .AddSingleton<UserInput>()
+    .BuildServiceProvider();
+
+var userInput = serviceProvider.GetRequiredService<UserInput>();
+
 await userInput.GetCategoriesInput();

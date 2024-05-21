@@ -2,7 +2,7 @@
 using System.Text.Json;
 
 namespace DrinksInfo;
-internal class DrinksService
+public class DrinksService : IDrinksService
 {
     public async Task<List<Category>> GetCategories()
     {
